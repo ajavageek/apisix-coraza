@@ -1,0 +1,9 @@
+deployment:
+  role: data_plane
+  role_data_plane:
+    config_provider: yaml
+wasm:
+  plugins:
+    - name: coraza-filter
+      priority: 7999
+      file: /usr/local/apisix/proxywasm/coraza-proxy-wasm.wasm

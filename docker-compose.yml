@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  apisix:
+    build: .
+    platform: linux/amd64
+    volumes:
+      - ./conf/config.yml:/usr/local/apisix/conf/config.yaml:ro
+      - ./conf/apisix.yml:/usr/local/apisix/conf/apisix.yaml:ro
+    ports:
+      - '9080:9080'

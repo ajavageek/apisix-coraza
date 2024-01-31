@@ -1,0 +1,32 @@
+upstreams:
+  - id: 1
+    nodes:
+      "httpbin.org:80": 1
+
+global_rules:
+  - id: 1
+    plugins:
+      coraza-filter:
+        conf:
+          directives_map:
+            default:
+              - SecDebugLogLevel 9
+              - SecRuleEngine On
+              - Include @crs-setup-conf
+              - Include @owasp_crs/*.conf
+          default_directives: default
+
+routes:
+  - uri: /
+    methods: ["GET"]
+    upstream_id: 1
+    plugins:
+      proxy-rewrite:
+        uri: /get
+  - uri: /
+    methods: ["POST"]
+    upstream_id: 1
+    plugins:
+      proxy-rewrite:
+        uri: /post
+#END
